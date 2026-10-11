@@ -66,8 +66,9 @@
   .caps { font: 600 13px/1.2 var(--caps); letter-spacing: 0.12em; text-transform: uppercase; }
 
   /* Cabeçalho */
-  .mast { position: relative; display: grid; gap: 14px; padding-right: 210px; }
-  .wordmark { margin: 0; font: 900 clamp(52px, 10.5vw, 118px)/0.84 var(--display); letter-spacing: -0.012em; text-transform: uppercase; }
+  .mast { position: relative; display: grid; gap: 14px; padding-right: 210px; container-type: inline-size; }
+  /* A marca é uma palavra só (6,4 em de largura): o tamanho segue a largura do bloco para nunca estourar. */
+  .wordmark { margin: 0; font: 900 min(118px, 13.5cqi)/0.84 var(--display); letter-spacing: -0.012em; text-transform: uppercase; }
   .sub { color: var(--quiet); }
   .tag { position: absolute; right: 0; top: 4px; width: 188px; padding: 26px 14px 12px; background: var(--tie); color: var(--on-tie); border-radius: 6px; transform: rotate(-4deg); font: 700 13px/1.3 var(--caps); letter-spacing: 0.08em; text-transform: uppercase; }
   .tag::before { content: ''; position: absolute; top: 9px; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--on-tie); }
