@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="SessionBridge: produção musical a distância. Baixe, instale e teste com um parceiro de estúdio." />
+<title>SessionBridge para produtores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+/>
+<style>
+  /* Ficha técnica de streetwear industrial (o mesmo mundo do manual impresso): papel, tinta,
+     lacre laranja e a gramática "entre aspas". Linhas de ficha: rótulo à esquerda, conteúdo à direita. */
+  :root {
+    --paper: #ffffff;
+    --ink: #0a0a0a;
+    --label: #e8e7e4;
+    --quiet: #4f4d4a;
+    --rule: #0a0a0a;
+    --tie: #ff5a00;
+    --on-tie: #0a0a0a;
+    --display: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --text: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    --caps: 'Barlow Semi Condensed', 'Arial Narrow', Arial, sans-serif;
+    --stripe: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--paper) 6px 12px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --paper: #0c0c0c;
+      --ink: #f2f1ee;
+      --label: #1c1c1b;
+      --quiet: #b3b0aa;
+      --rule: #f2f1ee;
+      --tie: #ff6a1a;
+      --on-tie: #0a0a0a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme='dark'] {
+    --paper: #0c0c0c;
+    --ink: #f2f1ee;
+    --label: #1c1c1b;
+    --quiet: #b3b0aa;
+    --rule: #f2f1ee;
+    --tie: #ff6a1a;
+    --on-tie: #0a0a0a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font: 400 17px/1.55 var(--text); font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 40px 56px; }
+  a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--tie); outline-offset: 2px; }
+  strong { font-weight: 700; }
+  p { margin: 0; }
+
+  /* Nome de botão do app: caixa + aspas. Só para o que aparece de verdade na tela do app. */
+  .ui { display: inline-block; padding: 0 6px; border: 1.5px solid var(--ink); font: 700 0.78em/1.5 var(--caps); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+  .ui::before { content: '"'; }
+  .ui::after { content: '"'; }
+  .path { font: 700 0.86em/1.4 var(--caps); letter-spacing: 0.02em; }
+  .caps { font: 600 13px/1.2 var(--caps); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Cabeçalho */
+  .mast { position: relative; display: grid; gap: 14px; padding-right: 210px; }
+  .wordmark { margin: 0; font: 900 clamp(52px, 10.5vw, 118px)/0.84 var(--display); letter-spacing: -0.012em; text-transform: uppercase; }
+  .sub { color: var(--quiet); }
+  .tag { position: absolute; right: 0; top: 4px; width: 188px; padding: 26px 14px 12px; background: var(--tie); color: var(--on-tie); border-radius: 6px; transform: rotate(-4deg); font: 700 13px/1.3 var(--caps); letter-spacing: 0.08em; text-transform: uppercase; }
+  .tag::before { content: ''; position: absolute; top: 9px; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--on-tie); }
+  .tag b { display: block; margin-top: 6px; font: 900 28px/1 var(--display); letter-spacing: 0; }
+  .lead { max-width: 40em; font-size: 21px; line-height: 1.45; font-weight: 500; margin-top: 18px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border: 2px solid var(--ink); background: var(--ink); color: var(--paper); font: 800 18px/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn:hover { background: var(--tie); border-color: var(--tie); color: var(--on-tie); }
+
+  /* Linhas de ficha */
+  .row { display: grid; grid-template-columns: minmax(0, 230px) minmax(0, 1fr); gap: 12px 40px; padding-top: 30px; margin-top: 44px; border-top: 2px solid var(--rule); }
+  .row > h2 { margin: 0; font: 900 34px/0.92 var(--display); text-transform: uppercase; text-wrap: balance; }
+  .row > h2 small { display: block; margin-top: 10px; font: 600 13px/1.3 var(--caps); letter-spacing: 0.12em; color: var(--quiet); }
+  .col { display: grid; gap: 18px; min-width: 0; }
+  .col > p { max-width: 62ch; }
+
+  /* O problema: três jeitos de hoje */
+  .today { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 2px solid var(--rule); }
+  .today > div { padding: 18px 18px 20px; display: grid; gap: 8px; align-content: start; }
+  .today > div + div { border-left: 2px solid var(--rule); }
+  .today h3 { margin: 0; font: 800 21px/1.05 var(--display); text-transform: uppercase; }
+  .today p { color: var(--quiet); font-size: 16px; }
+
+  /* O que faz: placas */
+  .plates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .plate { position: relative; padding: 20px 22px 22px; background: var(--label); border: 1.5px solid var(--rule); display: grid; gap: 8px; align-content: start; }
+  .plate h3 { margin: 0; font: 900 26px/0.95 var(--display); text-transform: uppercase; }
+  .plate .spec { font: 600 13px/1.3 var(--caps); letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+  .note { padding-left: 14px; border-left: 4px solid var(--tie); max-width: 62ch; }
+
+  /* Baixar */
+  .downloads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .dl { display: grid; gap: 6px; align-content: start; padding: 18px 18px 20px; border: 2px solid var(--rule); text-decoration: none; }
+  .dl:hover { background: var(--tie); border-color: var(--tie); color: var(--on-tie); }
+  .dl:hover .meta { color: var(--on-tie); }
+  .dl .sys { font: 900 26px/0.95 var(--display); text-transform: uppercase; }
+  .dl .file { font: 700 14px/1.3 var(--caps); letter-spacing: 0.03em; overflow-wrap: anywhere; }
+  .dl .meta { color: var(--quiet); font-size: 15px; }
+  .dl .go { margin-top: 8px; font: 800 16px/1 var(--display); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* Passo a passo */
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 36px; }
+  .two h3 { margin: 0 0 4px; font: 900 26px/1 var(--display); text-transform: uppercase; }
+  ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; display: grid; gap: 14px; }
+  ol.steps > li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 8px; }
+  ol.steps > li::before { content: counter(s, decimal-leading-zero); font: 900 20px/1.25 var(--display); }
+  ol.steps ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; color: var(--quiet); }
+
+  /* Aviso: a listra corre por baixo do que pode dar errado */
+  .warn { border: 2px solid var(--rule); }
+  .warn p { padding: 12px 14px; font-size: 16px; }
+  .warn::after { content: ''; display: block; height: 10px; background: var(--stripe); border-top: 2px solid var(--rule); }
+  .warn b { font: 900 17px/1 var(--display); text-transform: uppercase; letter-spacing: 0.02em; margin-right: 6px; }
+  .cmd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 14px 12px; }
+  .cmd code { flex: 1 1 260px; min-width: 0; padding: 8px 10px; background: var(--label); font: 500 14px/1.4 ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace; overflow-x: auto; white-space: nowrap; }
+  .copy { padding: 8px 12px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font: 700 13px/1 var(--caps); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+  .copy:hover { background: var(--ink); color: var(--paper); }
+
+  /* Switch de controle, como no app */
+  .switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 2px solid var(--rule); }
+  .pos { position: relative; padding: 16px 18px 18px; display: grid; gap: 4px; }
+  .pos + .pos { border-left: 2px solid var(--rule); }
+  .pos .who { font: 900 30px/0.95 var(--display); text-transform: uppercase; }
+  .pos .who::before { content: '"'; }
+  .pos .who::after { content: '"'; }
+  .pos .state { justify-self: start; padding: 3px 8px; font: 700 12px/1 var(--caps); letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; }
+  .pos.on .state { background: var(--tie); color: var(--on-tie); }
+  .pos.off .state { border: 1.5px solid var(--quiet); color: var(--quiet); }
+  .pos.off .who { color: var(--quiet); }
+
+  /* Feedback */
+  .checks { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 28px; }
+  .checks li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; }
+  .checks li::before { content: ''; width: 16px; height: 16px; margin-top: 5px; border: 2px solid var(--ink); }
+  .template { display: grid; gap: 10px; }
+  .template pre { margin: 0; padding: 14px 16px; background: var(--label); font: 500 14px/1.55 ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  /* Problemas */
+  .faults-wrap { overflow-x: auto; }
+  table.faults { width: 100%; border-collapse: collapse; min-width: 520px; }
+  .faults th { text-align: left; padding: 0 0 18px; font: 600 13px/1 var(--caps); letter-spacing: 0.12em; text-transform: uppercase; background: var(--stripe) left bottom / 100% 9px no-repeat; }
+  .faults td { vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px dashed var(--rule); font-size: 16px; }
+  .faults td:first-child { width: 36%; font: 700 16px/1.35 var(--caps); letter-spacing: 0.01em; }
+  .faults tr:last-child td { border-bottom: 0; }
+
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 56px; padding-top: 16px; border-top: 2px solid var(--rule); color: var(--quiet); font-size: 15px; }
+  .foot .caps { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .mast { padding-right: 0; }
+    .tag { position: static; justify-self: start; transform: rotate(-2deg); margin-top: 8px; }
+    .row { grid-template-columns: minmax(0, 1fr); margin-top: 36px; }
+    .today, .downloads { grid-template-columns: minmax(0, 1fr); }
+    .today > div + div { border-left: 0; border-top: 2px solid var(--rule); }
+    .plates, .two, .checks { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .lead { font-size: 18px; }
+    .switch { grid-template-columns: minmax(0, 1fr); }
+    .pos + .pos { border-left: 0; border-top: 2px solid var(--rule); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn, .dl, .copy { transition: background-color 120ms, color 120ms, border-color 120ms; }
+  }
+</style>
+</head>
+<body style="margin:0">
+<div class="wrap">
+  <header class="mast">
+    <h1 class="wordmark">"SessionBridge"</h1>
+    <p class="caps sub">Produção musical a distância · guia para produtores</p>
+    <div class="tag" aria-label="Versão de testes 0.2, para Windows e Mac">
+      Versão de testes
+      <b>Ver. 0.2</b>
+      Windows + Mac
+    </div>
+    <p class="lead">
+      Duas pessoas produzindo na mesma DAW, cada uma no seu estúdio. Quem hospeda roda a DAW. Quem visita vê a tela, ouve o
+      master em estéreo, conversa por voz e assume o mouse e o teclado quando recebe o controle.
+    </p>
+    <div class="actions">
+      <a class="btn" href="#baixar">Baixar</a>
+      <a class="btn ghost" href="#instalar">Como instalar</a>
+    </div>
+  </header>
+
+  <section class="row" id="problema">
+    <h2>"O problema"</h2>
+    <div class="col">
+      <p>Produzir junto a distância hoje é sempre um meio-termo:</p>
+      <div class="today">
+        <div>
+          <h3>Projeto pelo drive</h3>
+          <p>Cada um tem plugins, samples e versão de DAW diferentes. O projeto abre quebrado do outro lado.</p>
+        </div>
+        <div>
+          <h3>Chamada com tela</h3>
+          <p>O áudio da chamada é feito para voz: mono e comprimido. Dá para conversar, não para mixar.</p>
+        </div>
+        <div>
+          <h3>Um de cada vez</h3>
+          <p>Só quem tem a DAW aberta mexe. O outro fica ditando "sobe o kick" pela chamada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="o-que-faz">
+    <h2>"O que faz"</h2>
+    <div class="col">
+      <div class="plates">
+        <div class="plate">
+          <span class="spec">Tela</span>
+          <h3>Vê a DAW de quem hospeda</h3>
+          <p>A tela inteira, em tempo real, nítida o bastante para ler o mixer e os plugins.</p>
+        </div>
+        <div class="plate">
+          <span class="spec">Master · estéreo 256 kbps</span>
+          <h3>Ouve o master de verdade</h3>
+          <p>O som sai de um plugin no master da DAW e vai direto para quem visita, em estéreo e alta qualidade.</p>
+        </div>
+        <div class="plate">
+          <span class="spec">Controle</span>
+          <h3>Assume mouse e teclado</h3>
+          <p>Quem visita pede o controle e mexe na DAW como se estivesse lá. Quem hospeda retoma na hora, só mexendo no próprio mouse.</p>
+        </div>
+        <div class="plate">
+          <span class="spec">Conversa · novo na 0.2</span>
+          <h3>Voz e chat no app</h3>
+          <p>Microfone com redução de eco e ruído, separado do master, e um chat para mandar nome de plugin, BPM ou link.</p>
+        </div>
+      </div>
+      <p class="note">
+        Funciona com qualquer DAW (FL Studio, Ableton Live e outras), e quem visita não precisa ter os mesmos plugins. Áudio e tela vão
+        direto de um computador ao outro. Há um atraso de alguns décimos de segundo: ótimo para produzir, mixar e arranjar; não serve para
+        tocar junto ao vivo.
+      </p>
+    </div>
+  </section>
+
+  <section class="row" id="baixar">
+    <h2>"Baixar"<small>Os dois produtores instalam</small></h2>
+    <div class="col">
+      <div class="downloads">
+        <a class="dl" href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-Setup.exe" target="_blank" rel="noopener">
+          <span class="sys">Windows</span>
+          <span class="file">SessionBridge-Setup.exe</span>
+          <span class="meta">Windows 10 ou 11 · cerca de 110 MB</span>
+          <span class="go">Baixar ↓</span>
+        </a>
+        <a class="dl" href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-mac-arm64.dmg" target="_blank" rel="noopener">
+          <span class="sys">Mac · chip Apple</span>
+          <span class="file">SessionBridge-mac-arm64.dmg</span>
+          <span class="meta">M1, M2, M3, M4 · macOS 12 ou mais novo</span>
+          <span class="go">Baixar ↓</span>
+        </a>
+        <a class="dl" href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-mac-x64.dmg" target="_blank" rel="noopener">
+          <span class="sys">Mac · Intel</span>
+          <span class="file">SessionBridge-mac-x64.dmg</span>
+          <span class="meta">Mac com processador Intel · macOS 12 ou mais novo</span>
+          <span class="go">Baixar ↓</span>
+        </a>
+      </div>
+      <p>
+        Não sabe qual Mac é o seu? Veja em <span class="path">Menu Apple › Sobre Este Mac</span>: "Chip Apple" é arm64, "Processador Intel" é
+        x64. Também tem o
+        <a href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/Manual-SessionBridge.pdf" target="_blank" rel="noopener">manual em PDF</a>
+        e a <a href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest" target="_blank" rel="noopener">página da versão</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="row" id="instalar">
+    <h2>"Instalar"</h2>
+    <div class="col">
+      <div class="two">
+        <div class="col">
+          <h3>Windows</h3>
+          <ol class="steps">
+            <li><span><strong>Feche a DAW</strong> antes de instalar, para o plugin poder ser copiado.</span></li>
+            <li><span>Abra o <strong>SessionBridge-Setup.exe</strong> e siga o instalador. Ele instala o app e o plugin VST3.</span></li>
+            <li><span>Na primeira sessão, o Windows pergunta se o app pode usar a rede: clique em <span class="ui">Permitir</span>, de preferência só em redes privadas.</span></li>
+          </ol>
+          <div class="warn">
+            <p><b>Aviso do Windows.</b> O instalador ainda não é assinado. Na tela azul, clique em <span class="ui">Mais informações</span> e depois em <span class="ui">Executar assim mesmo</span>.</p>
+          </div>
+        </div>
+        <div class="col">
+          <h3>Mac</h3>
+          <ol class="steps">
+            <li><span>Abra o <strong>.dmg</strong> e arraste o SessionBridge para a pasta <strong>Aplicativos</strong>.</span></li>
+            <li><span>Na primeira vez, clique no app com o botão direito e escolha <span class="ui">Abrir</span>.</span></li>
+            <li><span>Quem hospeda: no app, clique em <span class="ui">Instalar plugin</span>. Ele instala o VST3 e o AU.</span></li>
+            <li>
+              <span>Ao hospedar, o Mac pede permissões. Em <span class="path">Ajustes do Sistema › Privacidade e Segurança</span>, ative o SessionBridge em:</span>
+              <ul>
+                <li><strong>Acessibilidade</strong>, para quem visita comandar o mouse e o teclado;</li>
+                <li><strong>Gravação de Tela</strong>, para quem visita ver a tela;</li>
+                <li><strong>Microfone</strong> e <strong>Rede Local</strong>, quando o Mac perguntar.</li>
+              </ul>
+              <span>Depois, feche e abra o app de novo.</span>
+            </li>
+          </ol>
+          <div class="warn">
+            <p><b>Aviso do Mac.</b> O app ainda não tem a assinatura da Apple. Sem a opção de abrir, vá em <span class="path">Ajustes do Sistema › Privacidade e Segurança</span> e clique em <span class="ui">Abrir Mesmo Assim</span>. Se aparecer "o app está danificado", rode no Terminal:</p>
+            <div class="cmd">
+              <code id="xattr-cmd">xattr -dr com.apple.quarantine /Applications/SessionBridge.app</code>
+              <button class="copy" type="button" data-copy="xattr-cmd" id="copy-xattr">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="sessao">
+    <h2>"Primeira sessão"</h2>
+    <div class="col">
+      <div class="two">
+        <div class="col">
+          <h3>Quem hospeda</h3>
+          <ol class="steps">
+            <li>
+              <span><strong>Coloque o plugin SessionBridge no master.</strong></span>
+              <ul>
+                <li><strong>FL Studio:</strong> no Mixer, faixa Master, escolha SessionBridge num slot vazio.</li>
+                <li><strong>Ableton Live:</strong> arraste o SessionBridge do navegador para a faixa Master.</li>
+              </ul>
+            </li>
+            <li><span>Abra o app e clique em <span class="ui">Hospedar</span>. O painel "Plugin na DAW" fica verde.</span></li>
+            <li><span>Mande o <strong>código de 6 letras</strong> para quem vai entrar.</span></li>
+            <li><span>Quando chegar o pedido, clique em <span class="ui">Aceitar</span>.</span></li>
+          </ol>
+        </div>
+        <div class="col">
+          <h3>Quem visita</h3>
+          <ol class="steps">
+            <li><span>Abra o app e, em "Entrar numa sessão", digite o <strong>código</strong> e o seu nome.</span></li>
+            <li><span>Clique em <span class="ui">Entrar</span> e espere quem hospeda aceitar.</span></li>
+            <li><span>A tela aparece e o master começa a tocar. Escolha a <strong>Saída</strong> (o seu fone) e ajuste o volume.</span></li>
+          </ol>
+          <p>A primeira conexão do dia pode levar até 1 minuto: o servidor gratuito está acordando.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="durante">
+    <h2>"Durante a sessão"</h2>
+    <div class="col">
+      <div class="switch" role="img" aria-label="Switch de controle: quem hospeda está ativo; quem visita aguarda">
+        <div class="pos on"><span class="state">Ativo</span><span class="who">Você</span><span>Quem hospeda controla o próprio computador.</span></div>
+        <div class="pos off"><span class="state">Aguardando</span><span class="who">Visitante</span><span>Assiste e ouve até receber o controle.</span></div>
+      </div>
+      <div class="two">
+        <div class="col">
+          <h3>Controle</h3>
+          <ol class="steps">
+            <li><span>Quem visita clica em <span class="ui">Pedir controle</span>; quem hospeda clica em <span class="ui">Conceder</span>. Ou quem hospeda clica direto em <span class="ui">Passar controle</span>.</span></li>
+            <li><span>Com o controle, a borda da tela fica laranja: o mouse e o teclado de quem visita comandam a DAW. Os atalhos funcionam pela posição das teclas.</span></li>
+            <li><span>Para devolver: <span class="ui">Devolver controle</span>. Quem hospeda retoma na hora com <span class="ui">Retomar controle</span> ou só mexendo no próprio mouse.</span></li>
+          </ol>
+        </div>
+        <div class="col">
+          <h3>Conversa</h3>
+          <ol class="steps">
+            <li><span>O microfone começa desligado. Clique em <span class="ui">Ligar microfone</span>; depois, o mesmo botão deixa mudo.</span></li>
+            <li><span><strong>Use fone de ouvido.</strong> Com caixa de som, o microfone de quem hospeda capta a música da DAW e manda de volta, atrasada.</span></li>
+            <li><span>O chat fica no painel "Conversa". Enter envia, Shift+Enter pula linha. Quem visita esconde e mostra o chat pelo botão <span class="ui">Conversa</span>.</span></li>
+          </ol>
+        </div>
+      </div>
+      <p class="note">Só aceite gente que você conhece: quem entra pode controlar o seu computador quando você passar o controle.</p>
+    </div>
+  </section>
+
+  <section class="row" id="testar">
+    <h2>"O que testar"<small>e mandar no grupo</small></h2>
+    <div class="col">
+      <p>Produzam juntos por 15 a 20 minutos, passando o controle de um para o outro e conversando pelo app. Depois, contem:</p>
+      <ul class="checks">
+        <li>Windows ou Mac de cada um, e a DAW</li>
+        <li>Quem hospedou, quem visitou e a internet de cada um</li>
+        <li>Som do master: limpo, picotando, quanto atraso</li>
+        <li>Tela: fluida ou travando</li>
+        <li>Controle: mouse, teclado e atalhos da DAW</li>
+        <li>Voz e chat: deu para conversar? teve eco?</li>
+      </ul>
+      <div class="template">
+        <pre id="feedback">Sistema e DAW:
+Hospedei / visitei:
+Internet (cabo, Wi-Fi, 4G):
+Som do master:
+Tela:
+Controle:
+Voz e chat:
+Erros (mande print):</pre>
+        <div><button class="copy" type="button" data-copy="feedback" id="copy-feedback">Copiar modelo</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="problemas">
+    <h2>"Problemas"</h2>
+    <div class="col faults-wrap">
+      <table class="faults">
+        <thead><tr><th>Quando aparece</th><th>Faça isto</th></tr></thead>
+        <tbody>
+          <tr><td>"Aguardando o plugin no master"</td><td>Confira se o SessionBridge está na faixa Master e se a DAW está tocando com o áudio ligado.</td></tr>
+          <tr><td>"Não foi possível conectar ao servidor"</td><td>Espere 1 minuto e tente de novo: o servidor pode estar acordando. Confira a internet.</td></tr>
+          <tr><td>Parado em "Conectando…"</td><td>Os dois precisam permitir o app no firewall. Redes de empresa ou faculdade podem bloquear: tente outra rede ou o 4G do celular.</td></tr>
+          <tr><td>Som picotando</td><td>Feche programas pesados em quem hospeda. No FL Studio, desligue o Triple buffer nas configurações de áudio. Prefira cabo ao Wi-Fi.</td></tr>
+          <tr><td>Eco ou música na voz</td><td>Quem hospeda está sem fone: o microfone capta as caixas de som. Use fone de ouvido.</td></tr>
+          <tr><td>O outro não ouve a minha voz</td><td>Clique em "Ligar microfone" e confira se não está mudo. No Mac, libere o Microfone em Privacidade e Segurança.</td></tr>
+          <tr><td>Voz no lugar da música</td><td>Os dois precisam estar na mesma versão do app. Baixe de novo por esta página.</td></tr>
+          <tr><td>Controle não responde numa janela</td><td>No Windows, abra a DAW sem "Executar como administrador". No Mac, libere a Acessibilidade e reabra o app.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="caps">"SessionBridge" · Versão de testes 0.2</span>
+    <span>Áudio, tela e voz vão direto de um computador ao outro; o servidor só ajuda os dois a se encontrarem.</span>
+  </footer>
+</div>
+
+<script>
+  // Copiar: a área de transferência pode ser recusada (app de desktop antigo); aí seleciona o texto.
+  for (const button of document.querySelectorAll('[data-copy]')) {
+    button.addEventListener('click', async () => {
+      const source = document.getElementById(button.dataset.copy);
+      const label = button.textContent;
+      try {
+        await navigator.clipboard.writeText(source.textContent);
+        button.textContent = 'Copiado';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(source);
+        const selection = getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        button.textContent = 'Selecionado: Ctrl+C';
+      }
+      setTimeout(() => (button.textContent = label), 1800);
+    });
+  }
+</script>
+</body>
+</html>
