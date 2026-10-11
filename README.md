@@ -1,4 +1,4 @@
-# SessionBridge — versão de testes 0.2
+# SessionBridge — versão de testes 0.3
 
 Produção musical a distância: quem hospeda roda a DAW (FL Studio, Ableton...) e quem visita vê a tela, ouve o master em estéreo, conversa por voz e chat e assume mouse e teclado quando recebe o controle. Funciona entre Windows e Mac, em qualquer combinação.
 
@@ -27,6 +27,10 @@ O app ainda não é assinado:
 4. Liguem o microfone ("Ligar microfone"), de preferência com fone de ouvido, e produzam uns 15–20 minutos passando o controle de um para o outro.
 
 A primeira conexão do dia pode levar até 1 minuto (o servidor está acordando).
+
+## Novidades da 0.3
+
+- Bloco "Licença" na tela inicial. Nesta versão de testes tudo é liberado; no futuro, com chave de licença o uso é livre e sem chave é 1 hora por dia.
 
 ## Novidades da 0.2
 
