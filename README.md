@@ -1,4 +1,4 @@
-# SessionBridge — versão de testes 0.4
+# SessionBridge — versão de testes 0.4.1
 
 Produção musical a distância: quem hospeda roda a DAW (FL Studio, Ableton...) e recebe até 4 visitantes; quem visita vê a janela da DAW, ouve o master em estéreo, conversa por voz, câmera e chat e assume mouse e teclado quando recebe o controle. Funciona entre Windows e Mac, em qualquer combinação.
 
@@ -13,7 +13,7 @@ Produção musical a distância: quem hospeda roda a DAW (FL Studio, Ableton...)
 | Mac Intel | [SessionBridge-mac-x64.dmg](https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-mac-x64.dmg) |
 | Manual (3 páginas) | [Manual-SessionBridge.pdf](https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/Manual-SessionBridge.pdf) |
 
-Todos na sessão devem estar na **mesma versão** (quem ainda está na 0.3 consegue entrar numa sala 0.4, mas sem câmeras e sem a lista de participantes).
+Todos na sessão devem estar na **mesma versão: 0.4.1**. Quem ainda está na 0.4.0 consegue entrar, mas sem as novidades abaixo; quem está na 0.3 entra sem câmeras e sem a lista de participantes.
 
 O app ainda não é assinado:
 - **Windows:** na tela azul, "Mais informações" › "Executar assim mesmo".
@@ -27,6 +27,14 @@ O app ainda não é assinado:
 4. Liguem o microfone ("Ligar microfone"), de preferência com fone de ouvido, e produzam uns 15–20 minutos passando o controle de um para o outro.
 
 A primeira conexão do dia pode levar até 1 minuto (o servidor está acordando).
+
+## Novidades da 0.4.1
+
+- **Mouse próprio do visitante (Windows):** quem hospeda continua com o mouse livre enquanto o visitante mexe na DAW. Clique, clique direito e teclado do visitante não movem o seu mouse; arrastar, girar knob e rolar usam o seu mouse por um instante e o devolvem no mesmo lugar. Uma seta laranja com o nome do visitante mostra onde ele está. Para voltar ao jeito antigo: "Mouse do visitante" › "Compartilhado". No Mac continua compartilhado.
+- **Conexão entre redes que bloqueavam a ligação direta:** quando precisa, a sessão passa por um servidor de apoio (TURN). Se antes não conectava com alguém, tente de novo.
+- **Pedido de entrada no widget:** Aceitar e Recusar sem abrir a janela principal.
+- **A DAW coberta por outra janela não fica mais preta** para quem visita.
+- Avisos claros quando a conexão não fecha, quando cai e quando quem hospeda tira alguém da sala; o chat não duplica mais ao entrar de novo.
 
 ## Novidades da 0.4
 
