@@ -1,4 +1,4 @@
-# SessionBridge — versão de testes 0.4.1
+# SessionBridge — versão de testes 0.4.2 (Windows) · 0.4.1 (Mac)
 
 Produção musical a distância: quem hospeda roda a DAW (FL Studio, Ableton...) e recebe até 4 visitantes; quem visita vê a janela da DAW, ouve o master em estéreo, conversa por voz, câmera e chat e assume mouse e teclado quando recebe o controle. Funciona entre Windows e Mac, em qualquer combinação.
 
@@ -13,7 +13,7 @@ Produção musical a distância: quem hospeda roda a DAW (FL Studio, Ableton...)
 | Mac Intel | [SessionBridge-mac-x64.dmg](https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-mac-x64.dmg) |
 | Manual (3 páginas) | [Manual-SessionBridge.pdf](https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/Manual-SessionBridge.pdf) |
 
-Todos na sessão devem estar na **mesma versão: 0.4.1**. Quem ainda está na 0.4.0 consegue entrar, mas sem as novidades abaixo; quem está na 0.3 entra sem câmeras e sem a lista de participantes.
+Use a versão mais nova do seu sistema: **0.4.2 no Windows** e **0.4.1 no Mac** (a 0.4.2 do Mac sai em seguida; as duas funcionam juntas na mesma sala). Quem ainda está na 0.4.0 consegue entrar, mas sem as novidades abaixo; quem está na 0.3 entra sem câmeras e sem a lista de participantes.
 
 O app ainda não é assinado:
 - **Windows:** na tela azul, "Mais informações" › "Executar assim mesmo".
@@ -27,6 +27,12 @@ O app ainda não é assinado:
 4. Liguem o microfone ("Ligar microfone"), de preferência com fone de ouvido, e produzam uns 15–20 minutos passando o controle de um para o outro.
 
 A primeira conexão do dia pode levar até 1 minuto (o servidor está acordando).
+
+## Novidades da 0.4.2 (Windows)
+
+- **A setinha de quem visita voltou:** com o controle, você vê a sua setinha sobre o vídeo; o cursor de quem hospeda aparece em cinza com "QUEM HOSPEDA".
+- **Qualidade do vídeo** (quem hospeda escolhe em "Tela compartilhada"): Automática (padrão), Alta, Média e Leve. A Automática começa em Média e baixa sozinha para Leve quando a conexão está lenta.
+- **Menos atraso:** vídeo em até 24 quadros por segundo, sem acumular atraso quando a internet está lenta.
 
 ## Novidades da 0.4.1
 
