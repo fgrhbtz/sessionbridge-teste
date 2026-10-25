@@ -13,7 +13,7 @@
 />
 <style>
   /* Ficha técnica de streetwear industrial (o mesmo mundo do manual impresso): papel, tinta,
-     lacre laranja e a gramática "entre aspas". Linhas de ficha: rótulo à esquerda, conteúdo à direita. */
+     lacre laranja e caixa alta condensada, sem aspas decorativas. Linhas de ficha: rótulo à esquerda, conteúdo à direita. */
   :root {
     --paper: #ffffff;
     --ink: #0a0a0a;
@@ -58,10 +58,8 @@
   strong { font-weight: 700; }
   p { margin: 0; }
 
-  /* Nome de botão do app: caixa + aspas. Só para o que aparece de verdade na tela do app. */
+  /* Nome de botão do app: caixa de fio, sem aspas. Só para o que aparece de verdade na tela do app. */
   .ui { display: inline-block; padding: 0 6px; border: 1.5px solid var(--ink); font: 700 0.78em/1.5 var(--caps); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
-  .ui::before { content: '"'; }
-  .ui::after { content: '"'; }
   .path { font: 700 0.86em/1.4 var(--caps); letter-spacing: 0.02em; }
   .caps { font: 600 13px/1.2 var(--caps); letter-spacing: 0.12em; text-transform: uppercase; }
 
@@ -133,8 +131,6 @@
   .pos { position: relative; padding: 16px 18px 18px; display: grid; gap: 4px; }
   .pos + .pos { border-left: 2px solid var(--rule); }
   .pos .who { font: 900 30px/0.95 var(--display); text-transform: uppercase; }
-  .pos .who::before { content: '"'; }
-  .pos .who::after { content: '"'; }
   .pos .state { justify-self: start; padding: 3px 8px; font: 700 12px/1 var(--caps); letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; }
   .pos.on .state { background: var(--tie); color: var(--on-tie); }
   .pos.off .state { border: 1.5px solid var(--quiet); color: var(--quiet); }
@@ -180,7 +176,7 @@
 <body style="margin:0">
 <div class="wrap">
   <header class="mast">
-    <h1 class="wordmark">"SessionBridge"</h1>
+    <h1 class="wordmark">SessionBridge</h1>
     <p class="caps sub">Produção musical a distância · guia para produtores</p>
     <div class="tag" aria-label="Versão de testes 0.4.2 no Windows e 0.4.1 no Mac">
       Versão de testes
@@ -198,7 +194,7 @@
   </header>
 
   <section class="row" id="problema">
-    <h2>"O problema"</h2>
+    <h2>O problema</h2>
     <div class="col">
       <p>Produzir junto a distância hoje é sempre um meio-termo:</p>
       <div class="today">
@@ -219,7 +215,7 @@
   </section>
 
   <section class="row" id="o-que-faz">
-    <h2>"O que faz"</h2>
+    <h2>O que faz</h2>
     <div class="col">
       <div class="plates">
         <div class="plate">
@@ -257,7 +253,7 @@
   </section>
 
   <section class="row" id="baixar">
-    <h2>"Baixar"<small>Os dois produtores instalam</small></h2>
+    <h2>Baixar<small>Os dois produtores instalam</small></h2>
     <div class="col">
       <div class="downloads">
         <a class="dl" href="https://github.com/fgrhbtz/sessionbridge-teste/releases/latest/download/SessionBridge-Setup.exe" target="_blank" rel="noopener">
@@ -289,7 +285,7 @@
   </section>
 
   <section class="row" id="instalar">
-    <h2>"Instalar"</h2>
+    <h2>Instalar</h2>
     <div class="col">
       <div class="two">
         <div class="col">
@@ -332,7 +328,7 @@
   </section>
 
   <section class="row" id="sessao">
-    <h2>"Primeira sessão"</h2>
+    <h2>Primeira sessão</h2>
     <div class="col">
       <div class="two">
         <div class="col">
@@ -365,7 +361,7 @@
   </section>
 
   <section class="row" id="durante">
-    <h2>"Durante a sessão"</h2>
+    <h2>Durante a sessão</h2>
     <div class="col">
       <div class="switch" role="img" aria-label="Switch de controle: quem hospeda está ativo; quem visita aguarda">
         <div class="pos on"><span class="state">Ativo</span><span class="who">Você</span><span>Quem hospeda controla o próprio computador.</span></div>
@@ -403,7 +399,7 @@
   </section>
 
   <section class="row" id="testar">
-    <h2>"O que testar"<small>e mandar no grupo</small></h2>
+    <h2>O que testar<small>e mandar no grupo</small></h2>
     <div class="col">
       <p>Produzam juntos por 15 a 20 minutos, passando o controle de um para o outro e conversando pelo app. Depois, contem:</p>
       <ul class="checks">
@@ -429,18 +425,18 @@ Erros (mande print):</pre>
   </section>
 
   <section class="row" id="problemas">
-    <h2>"Problemas"</h2>
+    <h2>Problemas</h2>
     <div class="col faults-wrap">
       <table class="faults">
         <thead><tr><th>Quando aparece</th><th>Faça isto</th></tr></thead>
         <tbody>
-          <tr><td>"Aguardando o plugin no master"</td><td>Confira se o SessionBridge está na faixa Master e se a DAW está tocando com o áudio ligado.</td></tr>
-          <tr><td>"Não foi possível conectar ao servidor"</td><td>Espere 1 minuto e tente de novo: o servidor pode estar acordando. Confira a internet.</td></tr>
+          <tr><td>Aguardando o plugin no master</td><td>Confira se o SessionBridge está na faixa Master e se a DAW está tocando com o áudio ligado.</td></tr>
+          <tr><td>Não foi possível conectar ao servidor</td><td>Espere 1 minuto e tente de novo: o servidor pode estar acordando. Confira a internet.</td></tr>
           <tr><td>Parado em "Conectando…"</td><td>Os dois precisam permitir o app no firewall. Redes de empresa ou faculdade podem bloquear: tente outra rede ou o 4G do celular.</td></tr>
-          <tr><td>Plugin não aparece na DAW</td><td>Windows: rode o instalador de novo com a DAW fechada. Mac: clique em "Instalar plugin" no app. Depois, reescaneie os plugins na DAW; no FL Studio, marque a estrela do SessionBridge no Gerenciador de plugins. No Ableton, ele fica em Plug-ins › VST3 ou Audio Units › SessionBridge.</td></tr>
+          <tr><td>Plugin não aparece na DAW</td><td>Windows: rode o instalador de novo com a DAW fechada. Mac: clique em <span class="ui">Instalar plugin</span> no app. Depois, reescaneie os plugins na DAW; no FL Studio, marque a estrela do SessionBridge no Gerenciador de plugins. No Ableton, ele fica em Plug-ins › VST3 ou Audio Units › SessionBridge.</td></tr>
           <tr><td>Som picotando</td><td>Feche programas pesados em quem hospeda. No FL Studio, desligue o Triple buffer nas configurações de áudio. Prefira cabo ao Wi-Fi.</td></tr>
           <tr><td>Eco ou música na voz</td><td>Quem hospeda está sem fone: o microfone capta as caixas de som. Use fone de ouvido.</td></tr>
-          <tr><td>O outro não ouve a minha voz</td><td>Clique em "Ligar microfone" e confira se não está mudo. No Mac, libere o Microfone em Privacidade e Segurança.</td></tr>
+          <tr><td>O outro não ouve a minha voz</td><td>Clique em <span class="ui">Ligar microfone</span> e confira se não está mudo. No Mac, libere o Microfone em Privacidade e Segurança.</td></tr>
           <tr><td>Voz no lugar da música</td><td>Os dois precisam estar na mesma versão do app. Baixe de novo por esta página.</td></tr>
           <tr><td>Controle não responde numa janela</td><td>No Windows, abra a DAW sem "Executar como administrador". No Mac, libere a Acessibilidade e reabra o app.</td></tr>
         </tbody>
@@ -449,7 +445,7 @@ Erros (mande print):</pre>
   </section>
 
   <footer class="foot">
-    <span class="caps">"SessionBridge" · Versão de testes 0.4.2 (Windows) · 0.4.1 (Mac)</span>
+    <span class="caps">SessionBridge · Versão de testes 0.4.2 (Windows) · 0.4.1 (Mac)</span>
     <span>Áudio, tela e voz vão direto de um computador ao outro; o servidor só ajuda os dois a se encontrarem.</span>
   </footer>
 </div>
